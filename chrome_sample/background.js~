@@ -14,6 +14,7 @@ var toWriteSpreadsheet= "";
 // The onClicked callback function.
 function onClickHandler(info, tab) {
 	var xhr = new XMLHttpRequest();
+	//sends a request to the server?
 	xhr.open("GET", "/server.java", true);
 	xhr.onreadystatechange = function() {
   	if (xhr.readyState == 4) {

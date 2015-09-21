@@ -1,7 +1,7 @@
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
 	var context = "selection"; //only appears when text is selected
-	var title = "Write To X";
+	var title = "Write To Server";
 	var id = chrome.contextMenus.create({"title": title, "contexts":[context],
 					     "id": "context" + context});
  
