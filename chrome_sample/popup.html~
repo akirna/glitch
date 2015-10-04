@@ -6,6 +6,7 @@
  -->
 <html>
   <head>
+	<link rel="stylesheet" type="text/css" href="popup.css">
     <title>Getting Started Extension's Popup</title>
     <style>
       body {
@@ -23,7 +24,7 @@
     <script src="popup.js"></script>
   </head>
   <body>
-	Options: </br>
+	<h1>Options:</h1> </br>
 	<ul>
 	<li> Option 1 </li>
 	<li> Option 2 </li>

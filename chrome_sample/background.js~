@@ -27,6 +27,7 @@ function onClickHandler(info, tab) {
 
 	}
 	xhr.open("GET", "brki164-lnx-19:9000", true);
+	xhr.responseType="text"
 	xhr.send();
 	var sText = info.selectionText;
 	//window.alert(toWrite);

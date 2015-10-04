@@ -37,45 +37,27 @@ class MyServer(BaseHTTPRequestHandler):
         cont_type = self.check_type(self.path)
         self.send_header("Server", server_name)
         self.send_header("Content-Type", cont_type)
-        self.send_header("Access-Control-Allow-Origin","*");
+        '''self.send_header("Access-Control-Allow-Origin","*");
         self.send_header("Access-Control-Expose-Headers: Access-Control-Allow-Origin");
-        self.send_header(("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"));
+        self.send_header(("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"));'''
         self.end_headers()
     
     def do_GET(self):
         print("in do_GET");
-        self.send_response(200)
-        self.wfile.write(bytes("hello", 'UTF-8'))
-       	'''elif (self.path == "/search"): # send form
-            self.send_response(200)
-            length = self.find_file_length("/form.html")
-            self.send_header("Server", server_name)
-            self.send_header("Content-Length", length)
-            self.send_header("Content-Type", "text/html")
-            self.end_headers()
-            self.send_file("/form.html")
-            return
-
         okay = self.check_file(self.path)
-        if okay == True:
-            self.send_response(200)  # good file
+        self.path=self.path[1:]
+        if okay:
+            a=open(self.path,'a')
+            a.write("\n appending")
+            a.close()
         else:
-            self.send_response(404)  # bad file, we lump all codes for now
-        if okay == True:
-            cont_type = self.check_type(self.path)
-            length = self.find_file_length(self.path)
-            self.send_header("Server", server_name)
-            self.send_header("Content-Length", length)
-            self.send_header("Content-Type", cont_type)
-            self.end_headers()
-        
-        if okay == True:   # actually sending the file
-            self.send_file(self.path)
-        else:              # sending a default file
-            self.wfile.write(bytes("<html><head><title>Invalid file.</title></head>", "utf-8"))
-            self.wfile.write(bytes("<body><p>You requested an invalid file.</p>", "utf-8"))
-            self.wfile.write(bytes("<p>You accessed path: %s</p>" % self.path, "utf-8"))
-            self.wfile.write(bytes("</body></html>", "utf-8"))'''
+            f=open(self.path,'w')
+            f.write("\n new file")
+            f.close()
+        g=open(self.path,'r')
+        self.wfile.write(g.read().encode("utf-8"))
+        g.close()
+
 
     def do_POST(self):
         length = int(self.headers['Content-Length'])

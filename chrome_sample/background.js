@@ -22,11 +22,12 @@ function onClickHandler(info, tab) {
   	if (xhr.readyState == 4) {
     		//JSON.parse does not evaluate the attacker's scripts.
     		//var resp = JSON.parse(xhr.responseText);
-		window.alert(xhr.responseText);
+		window.alert(xhr.status);
   		}
 
 	}
 	xhr.open("GET", "brki164-lnx-19:9000", true);
+	xhr.responseType="text"
 	xhr.send();
 	var sText = info.selectionText;
 	//window.alert(toWrite);
