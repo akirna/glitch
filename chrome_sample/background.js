@@ -17,17 +17,16 @@ var toWriteSpreadsheet= ""; */
 // The onClicked callback function.
 function onClickHandler(info, tab) {
 	var xhr = new XMLHttpRequest();
-	//sends a request to the server?
-	xhr.open("GET", "brki164-lnx-14:9000/form.html", true);	
+	//sends a request to the server
 	xhr.onreadystatechange = function() {
   	if (xhr.readyState == 4) {
     		//JSON.parse does not evaluate the attacker's scripts.
-		window.alert(xhr.getAllResponseHeaders());
     		//var resp = JSON.parse(xhr.responseText);
-		//window.alert(resp);
+		window.alert(xhr.responseText);
   		}
 
 	}
+	xhr.open("GET", "brki164-lnx-19:9000", true);
 	xhr.send();
 	var sText = info.selectionText;
 	//window.alert(toWrite);

@@ -35,16 +35,15 @@ class MyServer(BaseHTTPRequestHandler):
         else:
             self.send_response(404)  # bad file, we lump all codes for now
         cont_type = self.check_type(self.path)
-        self.send_header("Server", server_name)
-        self.send_header("Content-Type", cont_type)
-        self.send_header("Access-Control-Allow-Origin","*");
-        self.send_header("Access-Control-Expose-Headers: Access-Control-Allow-Origin");
-        self.send_header(("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"));
-        self.end_headers()
+	self.send_header("Server", server_name)
+	self.send_header("Content-Type", cont_type)
+	self.send_header("Access-Control-Allow-Origin","*");
+	self.send_header("Access-Control-Expose-Headers: Access-Control-Allow-Origin");
+	self.send_header(("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+	self.end_headers()
     
     def do_GET(self):
         print("in do_GET");
-        self.send_response(200)
         self.wfile.write(bytes("hello", 'UTF-8'))
        	'''elif (self.path == "/search"): # send form
             self.send_response(200)
