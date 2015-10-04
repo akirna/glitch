@@ -9,18 +9,22 @@ chrome.runtime.onInstalled.addListener(function() {
 
 // add click event
 chrome.contextMenus.onClicked.addListener(onClickHandler);
-var toWrite = "";
-var toWriteSpreadsheet= ""; 
+/*var toWrite = "";
+var toWriteSpreadsheet= ""; */
+
+
+
 // The onClicked callback function.
 function onClickHandler(info, tab) {
 	var xhr = new XMLHttpRequest();
 	//sends a request to the server?
-	xhr.open("GET", "/server.java", true);
+	xhr.open("GET", "brki164-lnx-14:9000/form.html", true);	
 	xhr.onreadystatechange = function() {
   	if (xhr.readyState == 4) {
-    		// JSON.parse does not evaluate the attacker's scripts.
-    		var resp = JSON.parse(xhr.responseText);
-		window.alert(resp);
+    		//JSON.parse does not evaluate the attacker's scripts.
+		window.alert(xhr.getAllResponseHeaders());
+    		//var resp = JSON.parse(xhr.responseText);
+		//window.alert(resp);
   		}
 
 	}
