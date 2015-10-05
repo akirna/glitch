@@ -58,7 +58,6 @@ class MyServer(BaseHTTPRequestHandler):
         self.wfile.write(g.read().encode("utf-8"))
         g.close()
 
-
     def do_POST(self):
         length = int(self.headers['Content-Length'])
         post_data = urllib.parse.parse_qs(self.rfile.read(length).decode('utf-8'))

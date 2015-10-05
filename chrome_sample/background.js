@@ -26,7 +26,7 @@ function onClickHandler(info, tab) {
   		}
 
 	}
-	xhr.open("GET", "brki164-lnx-19:9000", true);
+	xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000/index.html", true);
 	xhr.responseType="text"
 	xhr.send();
 	var sText = info.selectionText;
