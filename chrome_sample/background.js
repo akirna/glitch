@@ -22,14 +22,19 @@ function onClickHandler(info, tab) {
   	if (xhr.readyState == 4) {
     		//JSON.parse does not evaluate the attacker's scripts.
     		//var resp = JSON.parse(xhr.responseText);
-		window.alert(xhr.status);
+		window.alert(xhr.responseText);
   		}
 
 	}
-	xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000/index.html", true);
+	/*xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000/index.html", true);
 	xhr.responseType="text"
-	xhr.send();
+	xhr.send();*/
+	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000/index.html",
+		 true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	var sText = info.selectionText;
+	xhr.send("text.txt="+sText);
+
 	//window.alert(toWrite);
 	//window.alert(toWriteSpreadsheet);
 	if(!(isNaN(Number(sText)))){

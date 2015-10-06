@@ -44,10 +44,19 @@ class MyServer(BaseHTTPRequestHandler):
     
     def do_GET(self):
         print("in do_GET");
-        #self.wfile.write(bytes("hello", 'UTF-8'))
-	f=open(self.path)
-	f.write("abc")
-	f.close()
+        okay = self.check_file(self.path)
+        self.path=self.path[1:]
+        if okay:
+            a=open(self.path,'a')
+            a.write("\n appending")
+            a.close()
+        else:
+            f=open(self.path,'w')
+            f.write("\n new file")
+            f.close()
+        g=open(self.path,'r')
+        self.wfile.write(g.read().encode("utf-8"))
+        g.close()
 
     def do_POST(self):
         length = int(self.headers['Content-Length'])

@@ -63,7 +63,10 @@ class MyServer(BaseHTTPRequestHandler):
         post_data = urllib.parse.parse_qs(self.rfile.read(length).decode('utf-8'))
         # You now have a dictionary of the post data
         print("post data: ", post_data)
-        
+        for k in post_data:
+            f=open(str(k),"w")
+            f.write(str(post_data[k]))
+            f.close()
         # now you have a dictionary of post data
         ret_data = self.build_data(post_data)
         self.wfile.write(ret_data.encode("utf-8"))
