@@ -1,3 +1,7 @@
+var fileName;
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('button').addEventListener('click', clickHandler);
+});
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
 	var context = "selection"; //only appears when text is selected
@@ -15,6 +19,10 @@ var toWriteSpreadsheet= ""; */
 
 
 // The onClicked callback function.
+function clickHandler(e) {
+	fileName=document.getElementById("filename").value;
+	//i think the page is being reloaded here, that's why it's not working
+}
 function onClickHandler(info, tab) {
 	var xhr = new XMLHttpRequest();
 	//sends a request to the server
@@ -29,11 +37,11 @@ function onClickHandler(info, tab) {
 	/*xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000/index.html", true);
 	xhr.responseType="text"
 	xhr.send();*/
-	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000/index.html",
+	xhr.open("POST", "http://brki164-lnx-18.bucknell.edu:9000",
 		 true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	var sText = info.selectionText;
-	xhr.send("text.txt="+sText);
+	xhr.send(fileName+"="+sText);
 
 	//window.alert(toWrite);
 	//window.alert(toWriteSpreadsheet);

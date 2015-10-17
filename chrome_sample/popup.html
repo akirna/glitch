@@ -6,14 +6,9 @@
  -->
 <html>
   <head>
+	<script src="background.js"></script>
 	<link rel="stylesheet" type="text/css" href="popup.css">
     <title>Getting Started Extension's Popup</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-      }
-    </style>
 
     <!--
       - JavaScript and HTML must be in separate files: see our Content Security
@@ -21,14 +16,15 @@
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
-    <script src="popup.js"></script>
   </head>
   <body>
 	<h1>Options:</h1> </br>
-	<ul>
-	<li> Option 1 </li>
-	<li> Option 2 </li>
-	</ul>
+	<form>
+	New File To Write To:
+	</br>
+	<input type="text" name="filename" id="filename">
+	</br>
+ 	<button>Submit</button>   	
   </body>
 </html>
 
