@@ -21,6 +21,7 @@ var toWriteSpreadsheet= ""; */
 // The onClicked callback function.
 function clickHandler(e) {
 	fileName=document.getElementById("filename").value;
+	window.alert(fileName);
 	//i think the page is being reloaded here, that's why it's not working
 }
 function onClickHandler(info, tab) {
@@ -30,14 +31,14 @@ function onClickHandler(info, tab) {
   	if (xhr.readyState == 4) {
     		//JSON.parse does not evaluate the attacker's scripts.
     		//var resp = JSON.parse(xhr.responseText);
-		window.alert(xhr.responseText);
+		//window.alert(xhr.responseText);
   		}
 
 	}
 	/*xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000/index.html", true);
 	xhr.responseType="text"
 	xhr.send();*/
-	xhr.open("POST", "http://brki164-lnx-18.bucknell.edu:9000",
+	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000",
 		 true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	var sText = info.selectionText;
