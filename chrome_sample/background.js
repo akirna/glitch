@@ -2,6 +2,9 @@ var fileName;
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('button').addEventListener('click', clickHandler);
 });
+document.addEventListener('DOMContentLoaded', function () {
+  window.alert(document.getElementsByTagName('option'))//.addEventListener('click', optionSelectedHandler);
+});
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
 	var context = "selection"; //only appears when text is selected
@@ -21,8 +24,10 @@ var toWriteSpreadsheet= ""; */
 // The onClicked callback function.
 function clickHandler(e) {
 	fileName=document.getElementById("filename").value;
+	localStorage.setItem("filename", fileName);
 	window.alert(fileName);
-	//i think the page is being reloaded here, that's why it's not working
+}
+function optionSelectedHandler(e) {
 }
 function onClickHandler(info, tab) {
 	var xhr = new XMLHttpRequest();
@@ -35,23 +40,15 @@ function onClickHandler(info, tab) {
   		}
 
 	}
-	/*xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000/index.html", true);
+	/*xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000", true);
 	xhr.responseType="text"
 	xhr.send();*/
+	fileName = localStorage.getItem("filename");
 	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000",
 		 true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	var sText = info.selectionText;
 	xhr.send(fileName+"="+sText);
 
-	//window.alert(toWrite);
-	//window.alert(toWriteSpreadsheet);
-	if(!(isNaN(Number(sText)))){
-		//window.alert("Number!");
-		toWriteSpreadsheet=toWriteSpreadsheet + " " + Number(sText) +"\n";
-	}
-	else{
-		//window.alert("String!");
-		toWrite=toWrite+ " "+ sText + "\n";
-	}	
+
 };

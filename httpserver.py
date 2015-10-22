@@ -12,6 +12,8 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib
 import time
 import os
+from os.path import isfile, join
+import operator
 
 #HOST_NAME = "localhost"
 HOST_NAME = "brki164-lnx-19"  # any real host name where the server is running
@@ -43,20 +45,19 @@ class MyServer(BaseHTTPRequestHandler):
         self.end_headers()
     
     def do_GET(self):
-        print("in do_GET");
-        okay = self.check_file(self.path)
-        self.path=self.path[1:]
-        if okay:
-            a=open(self.path,'a')
-            a.write("\n appending")
-            a.close()
-        else:
-            f=open(self.path,'w')
-            f.write("\n new file")
-            f.close()
-        g=open(self.path,'r')
-        self.wfile.write(g.read().encode("utf-8"))
-        g.close()
+        mypath=os.getcwd()
+        onlyfiles = [ f for f in os.listdir(mypath) if isfile(join(mypath,f)) ]
+        info={}
+        for x in onlyfiles:
+            fd = os.open(x, os.O_RDWR|os.O_CREAT )
+            fileInfo= os.fstat(fd)
+            info[x]=fileInfo[8]
+        sortedFiles = sorted(info.items(), key=operator.itemgetter(1),reverse=True)
+        self.wfile.write("   ".encode("utf-8"))
+        for x in sortedFiles:
+            print(x[0])
+            self.wfile.write(("<p>" + str(x[0]) + "</p>").encode("utf-8"))
+    
 
     def do_POST(self):
         length = int(self.headers['Content-Length'])
