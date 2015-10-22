@@ -1,10 +1,9 @@
 var fileName;
+var selected;
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('button').addEventListener('click', clickHandler);
 });
-document.addEventListener('DOMContentLoaded', function () {
-  window.alert(document.getElementsByTagName('option'))//.addEventListener('click', optionSelectedHandler);
-});
+
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
 	var context = "selection"; //only appears when text is selected
@@ -24,11 +23,16 @@ var toWriteSpreadsheet= ""; */
 // The onClicked callback function.
 function clickHandler(e) {
 	fileName=document.getElementById("filename").value;
-	localStorage.setItem("filename", fileName);
+	if (fileName != ''){
+		localStorage.setItem("filename", fileName);
+	}
+	else {
+		selected=document.getElementById("selector").value;
+		localStorage.setItem("filename", selected);
+	}
 	window.alert(fileName);
 }
-function optionSelectedHandler(e) {
-}
+
 function onClickHandler(info, tab) {
 	var xhr = new XMLHttpRequest();
 	//sends a request to the server

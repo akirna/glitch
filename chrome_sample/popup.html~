@@ -1,30 +1,36 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
+<!--                                                                                     
+ This page is shown when the extension button is clicked, because the                    
+ "browser_action" field in manifest.json contains the "default_popup" key with           
+ value "popup.html".                                                                     
  -->
 <html>
   <head>
-	<script src="background.js"></script>
-	<link rel="stylesheet" type="text/css" href="popup.css">
+        <script src="background.js"></script>
+        <!--<link rel="stylesheet" type="text/css" href="popup.css">-->
     <title>Getting Started Extension's Popup</title>
 
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+    <!--                                                                                 
+      - JavaScript and HTML must be in separate files: see our Content Security          
+      - Policy documentation[1] for details and explanation.                             
+      -                                                                                  
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy               
      -->
   </head>
   <body>
-	<h1>Options:</h1> </br>
-	<form>
-	New File To Write To:
-	</br>
-	<input type="text" name="filename">
-	</br>
- 	<button>Submit</button>   	
+        <h1>Options:</h1> </br>
+        <form>
+        New File To Write To:
+        </br>
+        <input type="text" name="filename" id="filename">
+        </br>
+        <button>Submit</button>
+	<select id = "selector" >
+  		<option value="volvo" selected>Volvo</option>
+  		<option value="saab">Saab</option>
+  		<option value="mercedes">Mercedes</option>
+  		<option value="audi">Audi</option>
+	</select>
+
   </body>
 </html>
-
