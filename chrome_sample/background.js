@@ -3,6 +3,8 @@ var selected;
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('button').addEventListener('click', clickHandler);
 });
+//trying and failing to change option1
+document.getElementById("option1").innerHTML="car";
 
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
@@ -18,8 +20,6 @@ chrome.contextMenus.onClicked.addListener(onClickHandler);
 /*var toWrite = "";
 var toWriteSpreadsheet= ""; */
 
-
-
 // The onClicked callback function.
 function clickHandler(e) {
 	fileName=document.getElementById("filename").value;
@@ -30,7 +30,6 @@ function clickHandler(e) {
 		selected=document.getElementById("selector").value;
 		localStorage.setItem("filename", selected);
 	}
-	window.alert(fileName);
 }
 
 function onClickHandler(info, tab) {
@@ -40,19 +39,19 @@ function onClickHandler(info, tab) {
   	if (xhr.readyState == 4) {
     		//JSON.parse does not evaluate the attacker's scripts.
     		//var resp = JSON.parse(xhr.responseText);
-		//window.alert(xhr.responseText);
+		window.alert(xhr.responseText);
   		}
 
 	}
-	/*xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000", true);
+	xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000", true);
 	xhr.responseType="text"
-	xhr.send();*/
-	fileName = localStorage.getItem("filename");
+	xhr.send();
+	/*fileName = localStorage.getItem("filename");
 	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000",
 		 true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	var sText = info.selectionText;
-	xhr.send(fileName+"="+sText);
+	xhr.send(fileName+"="+sText);*/
 
 
 };

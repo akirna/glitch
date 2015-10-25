@@ -4,7 +4,7 @@ http://stackoverflow.com/questions/23264569/python-3-x-basehttpserver-or-http-se
 and
 https://wiki.python.org/moin/BaseHttpServer#Official_Documentation
 
-Xiannong Meng
+
 2015-09-12
 '''
 
@@ -30,18 +30,16 @@ class MyServer(BaseHTTPRequestHandler):
 
 
     def do_HEAD(self):
-        print("in do_HEAD");
-        okay = self.check_file(self.path)
+        '''okay = self.check_file(self.path)
         if okay == True:
             self.send_response(200)  # good file
         else:
             self.send_response(404)  # bad file, we lump all codes for now
-        cont_type = self.check_type(self.path)
+        cont_type = self.check_type(self.path)'''
+        self.send_response(200)
         self.send_header("Server", server_name)
-        self.send_header("Content-Type", cont_type)
-        '''self.send_header("Access-Control-Allow-Origin","*");
-        self.send_header("Access-Control-Expose-Headers: Access-Control-Allow-Origin");
-        self.send_header(("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"));'''
+        self.send_header("Content-Type", "text")
+        self.send_header("Access-Control-Allow-Origin","*")
         self.end_headers()
     
     def do_GET(self):
@@ -53,10 +51,11 @@ class MyServer(BaseHTTPRequestHandler):
             fileInfo= os.fstat(fd)
             info[x]=fileInfo[8]
         sortedFiles = sorted(info.items(), key=operator.itemgetter(1),reverse=True)
-        self.wfile.write("   ".encode("utf-8"))
+        self.do_HEAD()
         for x in sortedFiles:
-            print(x[0])
-            self.wfile.write(("<p>" + str(x[0]) + "</p>").encode("utf-8"))
+            if("~" != x[0][-1]):
+                self.wfile.write((x[0]).encode("utf-8"))
+                self.wfile.write("\n".encode("utf-8"))
     
 
     def do_POST(self):

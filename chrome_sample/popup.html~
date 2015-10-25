@@ -24,13 +24,14 @@
         </br>
         <input type="text" name="filename" id="filename">
         </br>
-        <button>Submit</button>
+        
 	<select id = "selector" >
-  		<option value="volvo" selected>Volvo</option>
+  		<option id="option1" value="volvo" selected>Volvo</option>
   		<option value="saab">Saab</option>
   		<option value="mercedes">Mercedes</option>
   		<option value="audi">Audi</option>
 	</select>
+	<button>Submit</button>
 
   </body>
 </html>
