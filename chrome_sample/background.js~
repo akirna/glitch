@@ -1,10 +1,28 @@
 var fileName;
 var selected;
+var allfiles;
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('button').addEventListener('click', clickHandler);
+
 });
-//trying and failing to change option1
-document.getElementById("option1").innerHTML="car";
+
+var xhr = new XMLHttpRequest();
+	//sends a request to the server
+	xhr.onreadystatechange = function() {
+  	if (xhr.readyState == 4) {
+    		//JSON.parse does not evaluate the attacker's scripts.
+    		//var resp = JSON.parse(xhr.responseText);
+		window.alert(xhr.responseText);
+		localStorage.setItem("allfiles", xhr.responseText);
+  		}
+
+	}
+	xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000", true);
+	xhr.responseType="text"
+	xhr.send();
+	
+	//var menu = document.form.menu;
+	//for (i = 0; i < 
 
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
@@ -15,6 +33,9 @@ chrome.runtime.onInstalled.addListener(function() {
  
     });
 
+
+
+
 // add click event
 chrome.contextMenus.onClicked.addListener(onClickHandler);
 /*var toWrite = "";
@@ -22,6 +43,7 @@ var toWriteSpreadsheet= ""; */
 
 // The onClicked callback function.
 function clickHandler(e) {
+
 	fileName=document.getElementById("filename").value;
 	if (fileName != ''){
 		localStorage.setItem("filename", fileName);
@@ -33,25 +55,12 @@ function clickHandler(e) {
 }
 
 function onClickHandler(info, tab) {
-	var xhr = new XMLHttpRequest();
-	//sends a request to the server
-	xhr.onreadystatechange = function() {
-  	if (xhr.readyState == 4) {
-    		//JSON.parse does not evaluate the attacker's scripts.
-    		//var resp = JSON.parse(xhr.responseText);
-		window.alert(xhr.responseText);
-  		}
-
-	}
-	xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000", true);
-	xhr.responseType="text"
-	xhr.send();
-	/*fileName = localStorage.getItem("filename");
+	fileName = localStorage.getItem("filename");
 	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000",
 		 true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	var sText = info.selectionText;
-	xhr.send(fileName+"="+sText);*/
+	xhr.send(fileName+"="+sText);
 
 
 };

@@ -19,17 +19,17 @@
   </head>
   <body>
         <h1>Options:</h1> </br>
-        <form>
+        <form name = "form">
         New File To Write To:
         </br>
         <input type="text" name="filename" id="filename">
         </br>
         
-	<select id = "selector" >
-  		<option id="option1" value="volvo" selected>Volvo</option>
+	<select name = "select" id = "selector" size = 1>
+  		 <option id="option1" value="volvo" selected>Volvo</option>
   		<option value="saab">Saab</option>
   		<option value="mercedes">Mercedes</option>
-  		<option value="audi">Audi</option>
+  		<option value="audi">Audi</option> 
 	</select>
 	<button>Submit</button>
 

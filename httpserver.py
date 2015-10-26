@@ -52,10 +52,12 @@ class MyServer(BaseHTTPRequestHandler):
             info[x]=fileInfo[8]
         sortedFiles = sorted(info.items(), key=operator.itemgetter(1),reverse=True)
         self.do_HEAD()
+        allfiles = []
         for x in sortedFiles:
             if("~" != x[0][-1]):
                 self.wfile.write((x[0]).encode("utf-8"))
-                self.wfile.write("\n".encode("utf-8"))
+                self.wfile.write(("\n").encode("utf-8"))
+            
     
 
     def do_POST(self):

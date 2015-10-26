@@ -4,7 +4,7 @@ http://stackoverflow.com/questions/23264569/python-3-x-basehttpserver-or-http-se
 and
 https://wiki.python.org/moin/BaseHttpServer#Official_Documentation
 
-Xiannong Meng
+
 2015-09-12
 '''
 
@@ -12,6 +12,8 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib
 import time
 import os
+from os.path import isfile, join
+import operator
 
 #HOST_NAME = "localhost"
 HOST_NAME = "brki164-lnx-19"  # any real host name where the server is running
@@ -28,42 +30,43 @@ class MyServer(BaseHTTPRequestHandler):
 
 
     def do_HEAD(self):
-        print("in do_HEAD");
-        okay = self.check_file(self.path)
+        '''okay = self.check_file(self.path)
         if okay == True:
             self.send_response(200)  # good file
         else:
             self.send_response(404)  # bad file, we lump all codes for now
-        cont_type = self.check_type(self.path)
+        cont_type = self.check_type(self.path)'''
+        self.send_response(200)
         self.send_header("Server", server_name)
-        self.send_header("Content-Type", cont_type)
-        '''self.send_header("Access-Control-Allow-Origin","*");
-        self.send_header("Access-Control-Expose-Headers: Access-Control-Allow-Origin");
-        self.send_header(("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"));'''
+        self.send_header("Content-Type", "text")
+        self.send_header("Access-Control-Allow-Origin","*")
         self.end_headers()
     
     def do_GET(self):
-        print("in do_GET");
-        okay = self.check_file(self.path)
-        self.path=self.path[1:]
-        if okay:
-            a=open(self.path,'a')
-            a.write("\n appending")
-            a.close()
-        else:
-            f=open(self.path,'w')
-            f.write("\n new file")
-            f.close()
-        g=open(self.path,'r')
-        self.wfile.write(g.read().encode("utf-8"))
-        g.close()
+        mypath=os.getcwd()
+        onlyfiles = [ f for f in os.listdir(mypath) if isfile(join(mypath,f)) ]
+        info={}
+        for x in onlyfiles:
+            fd = os.open(x, os.O_RDWR|os.O_CREAT )
+            fileInfo= os.fstat(fd)
+            info[x]=fileInfo[8]
+        sortedFiles = sorted(info.items(), key=operator.itemgetter(1),reverse=True)
+        self.do_HEAD()
+        for x in sortedFiles:
+            if("~" != x[0][-1]):
+                self.wfile.write((x[0]).encode("utf-8"))
+                self.wfile.write("\n".encode("utf-8"))
+    
 
     def do_POST(self):
         length = int(self.headers['Content-Length'])
         post_data = urllib.parse.parse_qs(self.rfile.read(length).decode('utf-8'))
         # You now have a dictionary of the post data
         print("post data: ", post_data)
-        
+        for k in post_data:
+            f=open(str(k),"w")
+            f.write(str(post_data[k]))
+            f.close()
         # now you have a dictionary of post data
         ret_data = self.build_data(post_data)
         self.wfile.write(ret_data.encode("utf-8"))
