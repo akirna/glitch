@@ -1,29 +1,32 @@
 var fileName;
 var selected;
 var allfiles;
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelector('button').addEventListener('click', clickHandler);
 
-});
 
 var xhr = new XMLHttpRequest();
-	//sends a request to the server
-	xhr.onreadystatechange = function() {
-  	if (xhr.readyState == 4) {
+//sends a request to the server
+xhr.onreadystatechange = function() {
+  if (xhr.readyState == 4) {
     		//JSON.parse does not evaluate the attacker's scripts.
     		//var resp = JSON.parse(xhr.responseText);
-		window.alert(xhr.responseText);
-		localStorage.setItem("allfiles", xhr.responseText);
-  		}
+	localStorage.setItem("allfiles", xhr.responseText);
+  	}
+}
 
+xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000", true);
+xhr.responseType="text";
+xhr.send();
+
+document.addEventListener('DOMContentLoaded', function () {
+	document.querySelector('button').addEventListener('click', clickHandler);
+	var html=populateHTML();
+	window.alert(html);
+	for (var x=0; x< 5; x++){
+		var optString= 'option'+ (x+1).toString() ;
+		document.getElementById(optString).innerHTML=html[x];
 	}
-	xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000", true);
-	xhr.responseType="text"
-	xhr.send();
-	
-//
-	//var menu = document.form.menu;
-	//for (i = 0; i < 
+
+});
 
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
@@ -32,19 +35,37 @@ chrome.runtime.onInstalled.addListener(function() {
 	var id = chrome.contextMenus.create({"title": title, "contexts":[context],
 					     "id": "context" + context});
  
-    });
+});
 
 
 
 
 // add click event
 chrome.contextMenus.onClicked.addListener(onClickHandler);
-/*var toWrite = "";
-var toWriteSpreadsheet= ""; */
+
+function populateHTML(){	
+	var file = "";
+	var htmlText = [];
+	var count=0;
+	var len=localStorage.getItem("allfiles").length;
+	for (var i = 0; i < len; i++) {
+  		if ( (localStorage.getItem("allfiles").charAt(i)) != '\n' ){
+			file+=localStorage.getItem("allfiles").charAt(i);
+		}
+		else{
+			htmlText+=[file];
+			file="";
+			count++;
+			if (count==5){
+				break;
+			}
+		}
+	window.alert(htmlText);
+	return htmlText;
+}
 
 // The onClicked callback function.
 function clickHandler(e) {
-
 	fileName=document.getElementById("filename").value;
 	if (fileName != ''){
 		localStorage.setItem("filename", fileName);
