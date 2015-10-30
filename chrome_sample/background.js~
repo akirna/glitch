@@ -20,7 +20,6 @@ xhr.send();
 document.addEventListener('DOMContentLoaded', function () {
 	document.querySelector('button').addEventListener('click', clickHandler);
 	var html=populateHTML();
-	window.alert(html);
 	for (var x=0; x< 5; x++){
 		var optString= 'option'+ (x+1).toString() ;
 		document.getElementById(optString).innerHTML=html[x];
@@ -45,7 +44,7 @@ chrome.contextMenus.onClicked.addListener(onClickHandler);
 
 function populateHTML(){	
 	var file = "";
-	var htmlText = [];
+	var htmlText = "";
 	var count=0;
 	var len=localStorage.getItem("allfiles").length;
 	for (var i = 0; i < len; i++) {
@@ -53,14 +52,15 @@ function populateHTML(){
 			file+=localStorage.getItem("allfiles").charAt(i);
 		}
 		else{
-			htmlText+=[file];
+			htmlText+=file + ",";
 			file="";
 			count++;
 			if (count==5){
 				break;
 			}
 		}
-	window.alert(htmlText);
+	}
+	var list = htmlText.split(",");
 	return htmlText;
 }
 
@@ -84,5 +84,4 @@ function onClickHandler(info, tab) {
 	var sText = info.selectionText;
 	xhr.send(fileName+"="+sText);
 
-
-};
+}

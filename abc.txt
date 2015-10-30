@@ -1,1 +1,1 @@
-['user to send selected content to a server.']
+['are implicitly imported into every Haskell program. In this chapter, we describe the types and classes found in the Prelude. Most functions are not described in detail here as they can easily be understood from their definitions as given in']
