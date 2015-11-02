@@ -66,7 +66,11 @@ class MyServer(BaseHTTPRequestHandler):
         # You now have a dictionary of the post data
         print("post data: ", post_data)
         for k in post_data:
-            f=open(str(k),"w")
+            okay= self.check_file(k)
+            if okay:
+                f=open(str(k),"a")
+            else:
+                f=open(str(k),"w")
             f.write(str(post_data[k]))
             f.close()
         # now you have a dictionary of post data
