@@ -51,11 +51,15 @@ class MyServer(BaseHTTPRequestHandler):
             fileInfo= os.fstat(fd)
             info[x]=fileInfo[8]
         sortedFiles = sorted(info.items(), key=operator.itemgetter(1),reverse=True)
+        if len(sortedFiles)>5:
+            sortedFiles= sortedFiles[:5]
         self.do_HEAD()
+        allfiles = []
         for x in sortedFiles:
             if("~" != x[0][-1]):
                 self.wfile.write((x[0]).encode("utf-8"))
-                self.wfile.write("\n".encode("utf-8"))
+                self.wfile.write(("\n").encode("utf-8"))
+            
     
 
     def do_POST(self):
@@ -64,7 +68,11 @@ class MyServer(BaseHTTPRequestHandler):
         # You now have a dictionary of the post data
         print("post data: ", post_data)
         for k in post_data:
-            f=open(str(k),"w")
+            okay= os.path.isfile(k)
+            if okay:
+                f=open(str(k),"a")
+            else:
+                f=open(str(k),"w")
             f.write(str(post_data[k]))
             f.close()
         # now you have a dictionary of post data

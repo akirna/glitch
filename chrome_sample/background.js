@@ -20,10 +20,15 @@ xhr.send();
 document.addEventListener('DOMContentLoaded', function () {
 	document.querySelector('button').addEventListener('click', clickHandler);
 	var html=populateHTML();
-	for (var x=0; x< 5; x++){
-		var optString= 'option'+ (x+1).toString() ;
+	for (var x=0; x<html.length; x++){
+		var optString= 'option'+ (x+1).toString();
 		document.getElementById(optString).innerHTML=html[x];
 	}
+	while(x<5){
+		var optString= 'option'+ (x+1).toString();
+		document.getElementById(optString).outerHTML="<option id="+optString+" hidden></option>";
+		x++;
+	}	
 
 });
 
