@@ -51,12 +51,17 @@ class MyServer(BaseHTTPRequestHandler):
             fileInfo= os.fstat(fd)
             info[x]=fileInfo[8]
         sortedFiles = sorted(info.items(), key=operator.itemgetter(1),reverse=True)
-        if len(sortedFiles)>5:
-            sortedFiles= sortedFiles[:5]
-        self.do_HEAD()
-        allfiles = []
+        aList = []
         for x in sortedFiles:
             if("~" != x[0][-1] and x[0] != "httpserver.py"):
+                aList +=[x]
+        if len(aList)>5:
+            aList= aList[:5]
+ 
+        self.do_HEAD()
+        allfiles = []
+        for x in aList:
+ 
                 self.wfile.write((x[0]).encode("utf-8"))
                 self.wfile.write(("\n").encode("utf-8"))
             

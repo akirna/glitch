@@ -10,6 +10,7 @@ xhr.onreadystatechange = function() {
     		//JSON.parse does not evaluate the attacker's scripts.
     		//var resp = JSON.parse(xhr.responseText);
 	localStorage.setItem("allfiles", xhr.responseText);
+	window.alert(xhr.responseText);
   	}
 }
 
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		document.getElementById(optString).innerHTML=html[x];
 	}
 	while(x<5){
-		var optString= 'option'+ (x).toString();
+		var optString= 'option'+ (x+1).toString();
 		document.getElementById(optString).outerHTML="<option id="+optString+" hidden></option>";
 		x++;
 	}	
@@ -52,7 +53,9 @@ function populateHTML(){
 	var htmlText = "";
 	var count=0;
 	var len=localStorage.getItem("allfiles").length;
+
 	for (var i = 0; i < len; i++) {
+		console.log(htmlText);
   		if ( (localStorage.getItem("allfiles").charAt(i)) != '\n' ){
 			file+=localStorage.getItem("allfiles").charAt(i);
 		}
@@ -65,7 +68,11 @@ function populateHTML(){
 			}
 		}
 	}
-	var list = htmlText.split(",");
+
+var list = htmlText.split(",");
+
+	list.splice(list.length-1, 1);
+	
 	return list;
 }
 

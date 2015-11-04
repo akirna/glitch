@@ -10,6 +10,7 @@ xhr.onreadystatechange = function() {
     		//JSON.parse does not evaluate the attacker's scripts.
     		//var resp = JSON.parse(xhr.responseText);
 	localStorage.setItem("allfiles", xhr.responseText);
+
   	}
 }
 
@@ -52,7 +53,9 @@ function populateHTML(){
 	var htmlText = "";
 	var count=0;
 	var len=localStorage.getItem("allfiles").length;
+
 	for (var i = 0; i < len; i++) {
+		console.log(htmlText);
   		if ( (localStorage.getItem("allfiles").charAt(i)) != '\n' ){
 			file+=localStorage.getItem("allfiles").charAt(i);
 		}
@@ -65,7 +68,11 @@ function populateHTML(){
 			}
 		}
 	}
-	var list = htmlText.split(",");
+
+var list = htmlText.split(",");
+
+	list.splice(list.length-1, 1);
+	
 	return list;
 }
 
