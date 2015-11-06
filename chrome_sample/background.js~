@@ -10,7 +10,7 @@ xhr.onreadystatechange = function() {
     		//JSON.parse does not evaluate the attacker's scripts.
     		//var resp = JSON.parse(xhr.responseText);
 	localStorage.setItem("allfiles", xhr.responseText);
-	window.alert(xhr.responseText);
+
   	}
 }
 
@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
-	var context = "selection"; //only appears when text is selected
+	var context = ["selection","image","video","audio"]; //only appears when text is selected
 	var title = "Write To Server";
-	var id = chrome.contextMenus.create({"title": title, "contexts":[context],
+	var id = chrome.contextMenus.create({"title": title, "contexts":context,
 					     "id": "context" + context});
  
 });
@@ -89,6 +89,7 @@ function clickHandler(e) {
 }
 
 function onClickHandler(info, tab) {
+	window.alert(info.mediaType);
 	fileName = localStorage.getItem("filename");
 	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000",
 		 true);
