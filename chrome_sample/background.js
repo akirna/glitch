@@ -89,12 +89,20 @@ function clickHandler(e) {
 }
 
 function onClickHandler(info, tab) {
-	window.alert(info.mediaType);
+	var sText;
+	
+	var n = (info.mediaType).indexOf("image");
+	if (n>-1) {
+		sText = info.srcUrl;
+	}
+	else {
+		sText = info.selectionText;
+	}
 	fileName = localStorage.getItem("filename");
 	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000",
 		 true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	var sText = info.selectionText;
+
 	xhr.send(fileName+"="+sText);
 
 }
