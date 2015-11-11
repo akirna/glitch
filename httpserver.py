@@ -10,6 +10,7 @@ https://wiki.python.org/moin/BaseHttpServer#Official_Documentation
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib
+import urllib.request
 import time
 import os
 from os.path import isfile, join
@@ -61,10 +62,9 @@ class MyServer(BaseHTTPRequestHandler):
         self.do_HEAD()
         allfiles = []
         for x in aList:
- 
                 self.wfile.write((x[0]).encode("utf-8"))
                 self.wfile.write(("\n").encode("utf-8"))
-            
+                 
     
 
     def do_POST(self):
@@ -78,6 +78,9 @@ class MyServer(BaseHTTPRequestHandler):
                 f=open(str(k),"a")
             else:
                 f=open(str(k),"w")
+            print(post_data[k][0][-4:])
+            if post_data[k][0][-4:]==".png":
+                urllib.request.urlretrieve(post_data[k][0], str(k)+".png")
             f.write(str(post_data[k]))
             f.close()
         # now you have a dictionary of post data
