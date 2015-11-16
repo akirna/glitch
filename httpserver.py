@@ -73,16 +73,31 @@ class MyServer(BaseHTTPRequestHandler):
         # You now have a dictionary of the post data
         print("post data: ", post_data)
         for k in post_data:
-            okay= os.path.isfile(k)
-            if okay:
-                f=open(str(k),"a")
+            imgExtensions=[".png",".jpeg",".jpg",".tiff",".gif",".bmp",".svg"]
+            if post_data[k][0][-4:] in imgExtensions:
+                #gets the name of the file
+                fileName=""
+                i=-1
+                while(post_data[k][0][i]!="/"):
+                    fileName+=post_data[k][0][i]
+                    i-=1
+                fileName=fileName[::-1]
+                #if the name already exists, add a number to the end
+                if(os.path.isfile(fileName)):
+                    num=1
+                fileName=fileName[:-4]+"("+str(num)+")"+fileName[-4:]
+                while(os.path.isfile(fileName)):
+                    num+=1
+                    fileName=fileName[:-4]+"("+str(num)+")"+fileName[-4:]
+                urllib.request.urlretrieve(post_data[k][0], fileName)
             else:
-                f=open(str(k),"w")
-            print(post_data[k][0][-4:])
-            if post_data[k][0][-4:]==".png":
-                urllib.request.urlretrieve(post_data[k][0], str(k)+".png")
-            f.write(str(post_data[k]))
-            f.close()
+                okay= os.path.isfile(k)
+                if okay:
+                    f=open(str(k),"a")
+                else:
+                    f=open(str(k),"w")
+                    f.write(str(post_data[k]))
+                    f.close()
         # now you have a dictionary of post data
         ret_data = self.build_data(post_data)
         self.wfile.write(ret_data.encode("utf-8"))
