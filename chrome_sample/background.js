@@ -20,6 +20,7 @@ xhr.send();
 
 document.addEventListener('DOMContentLoaded', function () {
 	document.querySelector('button').addEventListener('click', clickHandler);
+	document.getElementById("currentFile").innerHTML="Current File: "+localStorage.getItem("filename");
 	var html=populateHTML();
 	for (var x=0; x<html.length; x++){
 		var optString= 'option'+ (x+1).toString();

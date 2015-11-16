@@ -20,6 +20,7 @@ xhr.send();
 
 document.addEventListener('DOMContentLoaded', function () {
 	document.querySelector('button').addEventListener('click', clickHandler);
+	document.getElementById("currentFile").innerHTML="Current File: "+fileName;
 	var html=populateHTML();
 	for (var x=0; x<html.length; x++){
 		var optString= 'option'+ (x+1).toString();
@@ -92,7 +93,6 @@ function onClickHandler(info, tab) {
 	var sText;
 	if(info.mediaType !== undefined){
 		var n = (info.mediaType).indexOf("image");
-		window.alert(n);
 		if (n>-1) {
 			sText = info.srcUrl;
 		}
