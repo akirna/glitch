@@ -1,6 +1,7 @@
 var fileName;
 var selected;
 var allfiles;
+var MAXFILELEN = 15; // max length for items in menu
 
 
 var xhr = new XMLHttpRequest();
@@ -24,7 +25,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	var html=populateHTML();
 	for (var x=0; x<html.length; x++){
 		var optString= 'option'+ (x+1).toString();
-		document.getElementById(optString).innerHTML=html[x];
+		if (html[x].length > MAXFILELEN) { // truncate longer filenames
+		    document.getElementById(optString).outerHTML="<option id="+optString+" label="+html[x].substring(0, MAXFILELEN)+"...>"+html[x]+"</option>";
+		} else { // otherwise, show the whole name
+		    document.getElementById(optString).outerHTML="<option id="+optString+" label="+html[x].substring(0, MAXFILELEN)+">"+html[x]+"</option>";
+		}
 	}
 	while(x<5){
 		var optString= 'option'+ (x+1).toString();
@@ -50,30 +55,30 @@ chrome.runtime.onInstalled.addListener(function() {
 chrome.contextMenus.onClicked.addListener(onClickHandler);
 
 function populateHTML(){	
-	var file = "";
-	var htmlText = "";
-	var count=0;
-	var len=localStorage.getItem("allfiles").length;
-
-	for (var i = 0; i < len; i++) {
-  		if ( (localStorage.getItem("allfiles").charAt(i)) != '\n' ){
-			file+=localStorage.getItem("allfiles").charAt(i);
-		}
-		else{
-			htmlText+=file + ",";
-			file="";
-			count++;
-			if (count==5){
-				break;
-			}
-		}
+    var file = "";
+    var htmlText = "";
+    var count=0;
+    var len=localStorage.getItem("allfiles").length;
+    
+    for (var i = 0; i < len; i++) {
+	if ( (localStorage.getItem("allfiles").charAt(i)) != '\n' ){
+	    file+=localStorage.getItem("allfiles").charAt(i);
 	}
-
-var list = htmlText.split(",");
-
-	list.splice(list.length-1, 1);
-	
-	return list;
+	else{
+	    htmlText+=file + ",";
+	    file="";
+	    count++;
+	    if (count==5){
+		break;
+	    }
+	}
+    }
+    
+    var list = htmlText.split(",");
+    
+    list.splice(list.length-1, 1);
+    
+    return list;
 }
 
 // The onClicked callback function.
