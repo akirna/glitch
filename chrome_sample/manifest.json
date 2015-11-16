@@ -12,7 +12,10 @@
   "permissions": ["contextMenus","nativeMessaging"],
   "background": {
     "persistent": false,
-    "scripts": ["background.js"]
+    "scripts": ["background.js",
+    	       "jquery.min.js",
+	       "bootstrap.min.js"]
   },
+
   "manifest_version": 2
 }

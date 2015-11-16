@@ -6,9 +6,19 @@
  -->
 <html>
   <head>
-        <script src="background.js"></script>
-        <!--<link rel="stylesheet" type="text/css" href="popup.css">-->
+    <script src="background.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="popup.css">-->
     <title>Getting Started Extension's Popup</title>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ 
+    <script src="jquery.min.js"></script>
+  
+    <script src="bootstrap.min.js"></script>
 
     <!--                                                                                 
       - JavaScript and HTML must be in separate files: see our Content Security          
@@ -18,22 +28,39 @@
      -->
   </head>
   <body>
-	<h3 id="currentFile">Current File: None</h3></br>
-        <h1>Options:</h1> </br>
-        <form name = "form">
-        New File To Write To:
+
+    <div class="container">
+      <ul class="nav nav-tabs" role="tablist">
+	<li class="active"><a data-toggle="tab" href="#main">Main</a></li>
+	<li><a data-toggle="tab" href="#settings">Settings</a></li>
+      </ul>
+
+      <div class="tab-content">
+	<div id="main" class="tab-pane fade in active">
+	  <!-- Main content goes here --->
+	  <h3 id="currentFile">Current File: None</h3></br>
+	</div>
+
+	<div id="settings" class="tab-pane fade">
+	  <!-- Settings content goes here -->
+	  <h1>Options:</h1> </br>
+	  <form name="form">
+            New File To Write To:
         </br>
         <input type="text" name="filename" id="filename">
         </br>
         
-	<select name = "menu" id = "selector" size = 1>
-  		 <option id="option1" selected></option>
-  		<option id="option2"></option>
-  		<option id="option3"></option>
-  		<option id="option4"></option> 
-  		<option id="option5"></option>
+	<select name="menu" id="selector" size="1">
+  	  <option id="option1" selected></option>
+  	  <option id="option2"></option>
+  	  <option id="option3"></option>
+  	  <option id="option4"></option> 
+  	  <option id="option5"></option>
 	</select>
 	<button>Submit</button>
-
+	</div>
+      </div>
+    </div>
+ 
   </body>
 </html>
