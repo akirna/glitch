@@ -56,7 +56,6 @@ function populateHTML(){
 	var len=localStorage.getItem("allfiles").length;
 
 	for (var i = 0; i < len; i++) {
-		console.log(htmlText);
   		if ( (localStorage.getItem("allfiles").charAt(i)) != '\n' ){
 			file+=localStorage.getItem("allfiles").charAt(i);
 		}
@@ -96,7 +95,19 @@ function onClickHandler(info, tab) {
 		if (n>-1) {
 			sText = info.srcUrl;
 		}
-	}
+		else{
+			n = (info.mediaType).indexOf("video");
+			if (n>-1) {
+				sText = info.srcUrl;
+			}
+			else{
+				n = (info.mediaType).indexOf("audio");
+				if (n>-1) {
+					sText = info.srcUrl;
+				}
+			}
+			}
+		}
 	else {
 		sText = info.selectionText;
 	}

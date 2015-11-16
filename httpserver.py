@@ -10,7 +10,8 @@ https://wiki.python.org/moin/BaseHttpServer#Official_Documentation
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib
-import urllib.request
+#import urllib.request
+import requests
 import time
 import os
 from os.path import isfile, join
@@ -73,8 +74,10 @@ class MyServer(BaseHTTPRequestHandler):
         # You now have a dictionary of the post data
         print("post data: ", post_data)
         for k in post_data:
-            imgExtensions=[".png",".jpeg",".jpg",".tiff",".gif",".bmp",".svg"]
-            if post_data[k][0][-4:] in imgExtensions:
+            imgVidAudExtensions=[".png",".jpeg",".jpg",".tiff",".gif",".bmp",".svg",".mp4",\
+                                 ".flv",".ogg",".gifv",".mov",".qt",".wmv",".m4p",".m4v",\
+                                 ".mpg",".mp2",".mpeg",".mp3",".wav",".wma",".m4a"]
+            if post_data[k][0][-4:] in imgVidAudExtensions:
                 #gets the name of the file
                 fileName=""
                 i=-1
@@ -85,11 +88,18 @@ class MyServer(BaseHTTPRequestHandler):
                 #if the name already exists, add a number to the end
                 if(os.path.isfile(fileName)):
                     num=1
-                fileName=fileName[:-4]+"("+str(num)+")"+fileName[-4:]
+                    fileName=fileName[:-4]+str(num)+fileName[-4:]
                 while(os.path.isfile(fileName)):
                     num+=1
-                    fileName=fileName[:-4]+"("+str(num)+")"+fileName[-4:]
-                urllib.request.urlretrieve(post_data[k][0], fileName)
+                    fileName=fileName[:-4]+str(num)+fileName[-4:]
+                #urllib.request.urlretrieve(post_data[k][0], fileName)
+                r = requests.get(post_data[k][0], stream=True)
+                with open(fileName, 'wb') as f:
+                    print("Downloading...")
+                    for chunk in r.iter_content(chunk_size=1024): 
+                        if chunk:
+                            f.write(chunk)
+                    print("Complete")
             else:
                 okay= os.path.isfile(k)
                 if okay:
@@ -98,10 +108,11 @@ class MyServer(BaseHTTPRequestHandler):
                     f=open(str(k),"w")
                     f.write(str(post_data[k]))
                     f.close()
+                
         # now you have a dictionary of post data
-        ret_data = self.build_data(post_data)
-        self.wfile.write(ret_data.encode("utf-8"))
-        self.wfile.write("Lorem Ipsum".encode("utf-8"))
+        #ret_data = self.build_data(post_data)
+        #self.wfile.write(ret_data.encode("utf-8"))
+        #self.wfile.write("Lorem Ipsum".encode("utf-8"))
 
     def build_data(self, post_data):
         """
