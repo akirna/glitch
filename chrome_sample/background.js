@@ -15,9 +15,7 @@ xhr.onreadystatechange = function() {
   	}
 }
 
-xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000", true);
-xhr.responseType="text";
-xhr.send();
+
 
 document.addEventListener('DOMContentLoaded', function () {
 	document.querySelector('button').addEventListener('click', clickHandler);
@@ -49,7 +47,9 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 
-
+xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000", true);
+xhr.responseType="text";
+xhr.send();
 
 // add click event
 chrome.contextMenus.onClicked.addListener(onClickHandler);
