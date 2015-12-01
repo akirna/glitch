@@ -33,6 +33,7 @@
 	<li class="active"><a data-toggle="tab" href="#main">Main</a></li>
 	<li><a data-toggle="tab" href="#settings">Settings</a></li>
 	<li><a data-toggle="tab" href="#notepad">Notepad</a></li>
+	<li><a data-toggle="tab" href="#seeNotes" id="viewNotes">View Notes</a></li>
       </ul>
 
       <div class="tab-content">
@@ -57,11 +58,11 @@
 	    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#menu">Files <span class="caret"></span></a>
 	      <!-- File names populate here: --->
 	      <ul id="optionList" class="dropdown-menu">
-		<li><a id ="option1" href="#menu"></a></li>
-		<li><a id ="option2" href="#menu"></a></li>
-		<li><a id ="option3" href="#menu"></a></li>
-		<li><a id ="option4" href="#menu"></a></li>
-		<li><a id ="option5" href="#menu"></a></li>
+		<li id ="option1"><a href="#menu"></a></li>
+		<li id ="option2"><a href="#menu"></a></li>
+		<li id ="option3"><a href="#menu"></a></li>
+		<li id ="option4"><a href="#menu"></a></li>
+		<li id ="option5"><a href="#menu"></a></li>
 	      </ul>
 	    </li>
 	  </ul>
@@ -73,6 +74,10 @@
 	<textarea rows="4" cols="50" id="noteText"></textarea>
 	<button id="submitNotes">Submit</button>	
 	</h3></br>
+	</div>
+	<div id="seeNotes" class="tab-pane fade">
+	  <!-- View Notes content goes here --->
+	  <p id="notes">abc</p></br>
 	</div>
       </div>
     </div>

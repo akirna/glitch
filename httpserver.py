@@ -47,6 +47,7 @@ class MyServer(BaseHTTPRequestHandler):
         '''handles GET requests to the server'''
         fileList=self.getFiveMostRecentFiles()
         self.do_HEAD()
+        self.wfile.write(("file").encode("utf-8"))
         for x in fileList:
                 self.wfile.write((x[0]).encode("utf-8"))
                 self.wfile.write(("\n").encode("utf-8"))
@@ -92,7 +93,13 @@ class MyServer(BaseHTTPRequestHandler):
         post_data = urllib.parse.parse_qs(self.rfile.read(length).decode('utf-8'))
         # You now have a dictionary of the post data
         for k in post_data:
-            if post_data[k][0][-4:] in imgVidAudExtensions:
+            if post_data[k][0] == "getNotes":
+                f=open(k)
+                g=f.read()
+                self.do_HEAD()
+                self.wfile.write(("text"+g).encode("utf-8"))
+                f.close()
+            elif post_data[k][0][-4:] in imgVidAudExtensions:
                 self.downloadMediaFile(post_data[k][0])
             else:
                 self.saveTextToFile(k,post_data[k][0])
