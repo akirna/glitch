@@ -1,20 +1,13 @@
 var fileName;
 var selected;
-
-
 var xhr = new XMLHttpRequest();
+
 //sends a request to the server
-xhr.onreadystatechange = function() {
+/*xhr.onreadystatechange = function() {
 if (xhr.readyState == 4) {
 	localStorage.setItem("allfiles", xhr.responseText);
   	}
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-	document.querySelector('button').addEventListener('click', clickHandler);
-	document.getElementById("currentFile").innerHTML="Current File: "+localStorage.getItem("filename");
-	
-});
+}*/
 
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
@@ -28,20 +21,6 @@ chrome.runtime.onInstalled.addListener(function() {
 
 // add click event
 chrome.contextMenus.onClicked.addListener(onClickHandler);
-
-
-
-function clickHandler(e) {
-	fileName=document.getElementById("filename").value;
-	if (fileName != ''){
-		localStorage.setItem("filename", fileName);
-	}
-	else {
-		selected=document.getElementById("selector").value;
-		localStorage.setItem("filename", selected);
-	}
-}
-
 function onClickHandler(info, tab) {
 	var sText;
 	if(info.mediaType !== undefined){

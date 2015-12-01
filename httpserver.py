@@ -1,7 +1,7 @@
 '''
 Maria Cioffi, Cole Conte, Andrew Kirna
 httpserver.py
-Last Edited: Mon Nov 16 2015
+Last Edited: Mon Nov 30 2015
 Revised from a sample Python Server from Xiannong Meng,
 which was in turn revised from the code segments:
 http://stackoverflow.com/questions/23264569/python-3-x-basehttpserver-or-http-server
@@ -57,12 +57,12 @@ class MyServer(BaseHTTPRequestHandler):
         mypath=os.getcwd()
         fileList=self.getFiles(mypath)
         newFList = [x for x in fileList if isfile(x)]
-
         info={}
         for x in newFList:
             fd = os.open(x, os.O_RDWR|os.O_CREAT )
             fName=x.replace(str(mypath)+"/",'')
             fileInfo= os.fstat(fd)
+            os.close(fd)
             info[fName]=fileInfo[8]
         sortedFiles = sorted(info.items(), key=operator.itemgetter(1),reverse=True)
         fileList = []
@@ -84,9 +84,7 @@ class MyServer(BaseHTTPRequestHandler):
             if os.path.isfile(abs_d) and abs_d[0]!=" ":
                 fileList+=[abs_d]
         for x in fileList:
-            print(x)
-            print()
-        return fileList
+            return fileList
 
     def do_POST(self):
         '''handles POST requests to the server'''
@@ -97,7 +95,7 @@ class MyServer(BaseHTTPRequestHandler):
             if post_data[k][0][-4:] in imgVidAudExtensions:
                 self.downloadMediaFile(post_data[k][0])
             else:
-                self.saveTextToFile(k,post_data[k])
+                self.saveTextToFile(k,post_data[k][0])
 
     def downloadMediaFile(self,url):
         '''downloads a media file to the current directory.
