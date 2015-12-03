@@ -93,12 +93,14 @@ class MyServer(BaseHTTPRequestHandler):
         post_data = urllib.parse.parse_qs(self.rfile.read(length).decode('utf-8'))
         # You now have a dictionary of the post data
         for k in post_data:
-            if post_data[k][0] == "getNotes":
+            if post_data[k][0] == "!--GETNOTES":
                 f=open(k)
                 g=f.read()
                 self.do_HEAD()
                 self.wfile.write(("text"+g).encode("utf-8"))
                 f.close()
+            elif post_data[k][0][:12]=="!--OVERWRITE":
+                self.overwriteFile(k,post_data[k][0][12:])
             elif post_data[k][0][-4:] in imgVidAudExtensions:
                 self.downloadMediaFile(post_data[k][0])
             else:
@@ -146,7 +148,15 @@ class MyServer(BaseHTTPRequestHandler):
         else:
             print("Wrote to new file " + file)
 
-        
+    def overwriteFile(self,file,text):
+        f=open(str(file),"w")
+        f.write(str(text))
+        f.close()
+        f=open(str(file),"r")
+        g=f.read()
+        self.do_HEAD()
+        self.wfile.write(("text"+g).encode("utf-8"))
+        print("Overwrote file " + file)
             
 if __name__ == '__main__':
 
