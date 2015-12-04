@@ -6,9 +6,18 @@
  -->
 <html>
   <head>
-        <script src="background.js"></script>
-        <!--<link rel="stylesheet" type="text/css" href="popup.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="popup.css">-->
     <title>Getting Started Extension's Popup</title>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <script src="jquery.min.js"></script>
+  
+    <script src="bootstrap.min.js"></script>
 
     <!--                                                                                 
       - JavaScript and HTML must be in separate files: see our Content Security          
@@ -18,22 +27,61 @@
      -->
   </head>
   <body>
-	<h3 id="currentFile">Current File: None</h3></br>
-        <h1>Options:</h1> </br>
-        <form name = "form">
-        New File To Write To:
-        </br>
-        <input type="text" name="filename" id="filename">
-        </br>
-        
-	<select name = "menu" id = "selector" size = 1>
-  		 <option id="option1" selected></option>
-  		<option id="option2"></option>
-  		<option id="option3"></option>
-  		<option id="option4"></option> 
-  		<option id="option5"></option>
-	</select>
-	<button>Submit</button>
 
+    <div class="container">
+      <ul class="nav nav-tabs" role="tablist">
+	<li class="active"><a data-toggle="tab" href="#main">Main</a></li>
+	<li><a data-toggle="tab" href="#settings">Settings</a></li>
+	<li><a data-toggle="tab" href="#notepad">Notepad</a></li>
+	<li><a data-toggle="tab" href="#seeNotes" id="viewNotes">View Notes</a></li>
+      </ul>
+
+      <div class="tab-content">
+	<!-- Main --->
+	<div id="main" class="tab-pane fade in active">
+	  <!-- Main content goes here --->
+	  <h3 id="currentFile">Current File: None</h3></br>
+	</div>
+	<!-- Settings --->
+	<div id="settings" class="tab-pane fade">
+	  <!-- Settings content goes here -->
+	  <h1>Options:</h1> </br>
+
+	<!-- user can input their own file name --->
+	  <form name="form">
+            <p>New File To Write To:</p>
+	    <input type="text" name="filename" id="filename">
+         <br>
+
+	  <!-- Pill with dropdown menu --->
+	  <ul class="nav nav-pills">
+	    <li class="dropdown" id = "drop" ><a class="dropdown-toggle" data-toggle="dropdown" href="#menu">Files <span class="caret"></span></a>
+	      <!-- File names populate here: --->
+	      <ul id="optionList" class="dropdown-menu">
+		<li id ="option1"><a href="#menu"></a></li>
+		<li id ="option2"><a href="#menu"></a></li>
+		<li id ="option3"><a href="#menu"></a></li>
+		<li id ="option4"><a href="#menu"></a></li>
+		<li id ="option5"><a href="#menu"></a></li>
+	      </ul>
+	    </li>
+	  </ul>
+	<button id="choose">Choose</button>
+	</div>
+	<div id="notepad" class="tab-pane fade">
+	  <!-- Notepad content goes here --->
+	  <h3 id="noteInfo">
+	<textarea rows="4" cols="50" id="noteText"></textarea>
+	<button id="submitNotes">Submit</button>	
+	</h3></br>
+	</div>
+	<div id="seeNotes" class="tab-pane fade">
+	  <!-- View Notes content goes here --->
+	  <button id="editNotes">Edit</button>
+	  <p id="notesFromFile"></p></br>
+	</div>
+      </div>
+    </div>
+  <script src="popup.js"></script>
   </body>
 </html>

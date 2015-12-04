@@ -46,6 +46,7 @@ $("#optionList li").on('click',function(){
 	fName=$(this).text();
 	localStorage.setItem("filename",fName.substring(1));
 	document.getElementById("currentFile").innerHTML="Current File: "+localStorage.getItem("filename");
+	document.getElementById("drop").innerHTML=localStorage.getItem("filename") +" <span class=\"caret\"></span>";
 });
 
 
@@ -79,6 +80,7 @@ function clickHandler(e) {
 	fileName=document.getElementById("filename").value;
 	if (fileName != ''){
 		localStorage.setItem("filename", fileName);
+
 	}
 }
 
