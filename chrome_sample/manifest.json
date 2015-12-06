@@ -1,6 +1,6 @@
 {
   "name": "Glitch",
-  "description": "Glitch provides an online workflow by allowing the user to send selected content to a server for portable access.",
+  "description": "Glitch provides an enhanced online workflow by allowing the user to quickly save selected content to their local files.",
   "version": "1.0",
   "icons": { "16": "glitcheslogo.png",
            "48": "glitcheslogo.png",

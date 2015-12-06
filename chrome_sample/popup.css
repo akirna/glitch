@@ -1,12 +1,43 @@
+/* Custom CSS for adding style to our Glitch popup */
+
 body {
-    background-color: lightblue;
+    background-color: #2a282b;
+    width: 390px;
+    border: 2px solid #aacfdd;
 }
 
 h1 {
-    color: navy;
-    margin-left: 20px;
+    color: #fe875d;
+    text-align: center;
+    font-family: Palatino;
+    font-size: 4em;
 }
+
+h3 {
+    color: #aacfdd;
+}
+
+p {
+    color: #aacfdd;
+}
+
 li {
-	color: red;
-	margin-left: 0px;
+    color: red;
+    margin-left: 0px;
 }
+
+/* Bright color palette:
+Dark purple: #37375e
+Dark blue: #356288
+Light blue: #aacfdd
+Coral: #fe875d
+Red: #fe1100
+*/
+
+/* Juicy color palette:
+Dark: #2a282b
+Light blue: #82c3c7
+Light yellow: #ebce7d
+Orange: #ff4c2d
+Red: #c61800
+*/
