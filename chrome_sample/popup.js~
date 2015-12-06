@@ -7,6 +7,7 @@ xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
 		if(xhr.responseText.substring(0,4) == "file"){
 			localStorage.setItem("allfiles", xhr.responseText.substring(4));
+			
 		}
 		else{
 			localStorage.setItem("viewNotes",xhr.responseText.substring(4));
@@ -14,27 +15,28 @@ xhr.onreadystatechange = function() {
   		}
 	}
 }
-xhr.open("GET", "http://brki164-lnx-19.bucknell.edu:9000", true);
+xhr.open("GET", "http://brki164-lnx-10.bucknell.edu:9000", true);
 xhr.responseType="text";
 xhr.send();
-var html=populateHTML();
+doHTML();
+function doHTML(){
+	var html=populateHTML();
 
-for (var x=0; x<html.length; x++){
-	var optString= 'option'+ (x+1).toString();
-	
-	if (html[x].length > MAXFILELEN) { // truncate longer filenames
-		document.getElementById(optString).outerHTML="<li id ="+optString+"> <a label=" +html[x].substring(0, MAXFILELEN) + "... " + " href='#menu'>" + html[x] + "</a>" +"</li>";
-
-	}
-	else { // otherwise, show the whole name
+	for (var x=0; x<html.length; x++){
+		var optString= 'option'+ (x+1).toString();
+		if (html[x].length > MAXFILELEN) { // truncate longer filenames
+			document.getElementById(optString).outerHTML="<li id ="+optString+"> <a label=" +html[x].substring(0, MAXFILELEN) + "... " + " href='#menu'>" + html[x] + "</a>" +"</li>";
+		}
+		else { // otherwise, show the whole name
 		document.getElementById(optString).outerHTML="<li id ="+optString+"> <a label=" +html[x] +  " href='#menu'>" + html[x] + "</a>" +"</li>";
+		}
 	}
+	while(x<5){
+		var optString= 'option'+ (x+1).toString();
+		document.getElementById(optString).outerHTML="<li id ="+optString+" hidden> <a label=" +html[x] +  " href='#menu'>" + html[x] + "</a>" +"</li>";
+		x++;
+	}	
 }
-while(x<5){
-	var optString= 'option'+ (x+1).toString();
-	document.getElementById(optString).outerHTML="<li id ="+optString+" hidden> <a label=" +html[x] +  " href='#menu'>" + html[x] + "</a>" +"</li>";
-	x++;
-}	
 
 document.getElementById("choose").addEventListener('click', clickHandler);
 document.getElementById("currentFile").innerHTML="Current File: "+localStorage.getItem("filename");
@@ -46,7 +48,7 @@ $("#optionList li").on('click',function(){
 	fName=$(this).text();
 	localStorage.setItem("filename",fName.substring(1));
 	document.getElementById("currentFile").innerHTML="Current File: "+localStorage.getItem("filename");
-	document.getElementById("drop").innerHTML=localStorage.getItem("filename") +"<span class=\"caret\"></span>";
+	document.getElementById("drop").innerHTML=localStorage.getItem("filename") +" <span class=\"caret\"></span>";
 });
 
 
@@ -87,7 +89,7 @@ function clickHandler(e) {
 function submitNotes(e){
 	var notes = document.getElementById("noteText").value;
 	fileName = localStorage.getItem("filename");
-	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000",
+	xhr.open("POST", "http://brki164-lnx-10.bucknell.edu:9000",
 		 true);
 	xhr.send(fileName+"="+notes);
 }
@@ -118,13 +120,13 @@ function cancelChanges(e){
 function overwriteFile(){
 	fileName = localStorage.getItem("filename");
 	var text = localStorage.getItem("viewNotes");
-	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000",true);
+	xhr.open("POST", "http://brki164-lnx-10.bucknell.edu:9000",true);
 	xhr.send(fileName+"=!--OVERWRITE"+text);
 }
 function getNotes(){
 	fileName = localStorage.getItem("filename");
 	if(fileName != ''){
-		xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000",
+		xhr.open("POST", "http://brki164-lnx-10.bucknell.edu:9000",
 		 true);
 		xhr.send(fileName+"=!--GETNOTES");
 	}

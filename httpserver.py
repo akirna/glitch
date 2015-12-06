@@ -18,7 +18,7 @@ from os.path import isfile, join
 import operator
 
 #HOST_NAME = "localhost"
-HOST_NAME = "brki164-lnx-19"  # any real host name where the server is running
+HOST_NAME = "brki164-lnx-10"  # any real host name where the server is running
 HOST_PORT = 9000
 server_name = "Python Server"
 imgVidAudExtensions=[".png",".jpeg",".jpg",".tiff",".gif",".bmp",".svg",".mp4",\

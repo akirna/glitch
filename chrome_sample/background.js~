@@ -1,7 +1,6 @@
 var fileName;
 var selected;
-var sys = require('util');
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
 var xhr = new XMLHttpRequest();
 
 

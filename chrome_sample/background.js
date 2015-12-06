@@ -48,7 +48,7 @@ function onClickHandler(info, tab) {
 		sText = info.selectionText;
 	}
 	fileName = localStorage.getItem("filename");
-	xhr.open("POST", "http://brki164-lnx-19.bucknell.edu:9000",
+	xhr.open("POST", "http://brki164-lnx-10.bucknell.edu:9000",
 		 true);
 	xhr.send(fileName+"="+sText);
 
