@@ -1,9 +1,6 @@
 var fileName;
 var selected;
-
 var xhr = new XMLHttpRequest();
-
-
 
 //sends a request to the server
 /*xhr.onreadystatechange = function() {

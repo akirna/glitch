@@ -6,17 +6,14 @@
  -->
 <html>
   <head>
+    <!--<link rel="stylesheet" type="text/css" href="popup.css">-->
     <title>Getting Started Extension's Popup</title>
 
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- link for tabs stylesheet --->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-    <!-- link for custom stylesheet; keep this after tabs stylesheet --->
-    <link type="text/css" rel="stylesheet" href="popup.css"/>
 
     <script src="jquery.min.js"></script>
   
@@ -35,7 +32,6 @@
       <ul class="nav nav-tabs" role="tablist">
 	<li class="active"><a data-toggle="tab" href="#main">Main</a></li>
 	<li><a data-toggle="tab" href="#settings">Settings</a></li>
-	<li><a data-toggle="tab" href="#notepad">Notepad</a></li>
 	<li><a data-toggle="tab" href="#seeNotes" id="viewNotes">View Notes</a></li>
       </ul>
 
@@ -43,13 +39,12 @@
 	<!-- Main --->
 	<div id="main" class="tab-pane fade in active">
 	  <!-- Main content goes here --->
-	  <h1>Glitch</h1></br>
 	  <h3 id="currentFile">Current File: None</h3></br>
 	</div>
 	<!-- Settings --->
 	<div id="settings" class="tab-pane fade">
 	  <!-- Settings content goes here -->
-	  <h3>Options:</h3> </br>
+	  <h1>Options:</h1> </br>
 
 	<!-- user can input their own file name --->
 	  <form name="form">
@@ -59,7 +54,7 @@
 
 	  <!-- Pill with dropdown menu --->
 	  <ul class="nav nav-pills">
-	    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#menu" id = "drop" >Files <span class="caret"></span></a>
+	    <li class="dropdown"><a id="drop" class="dropdown-toggle" data-toggle="dropdown" href="#menu">Files <span class="caret"></span></a>
 	      <!-- File names populate here: --->
 	      <ul id="optionList" class="dropdown-menu">
 		<li id ="option1"><a href="#menu"></a></li>
@@ -71,13 +66,6 @@
 	    </li>
 	  </ul>
 	<button id="choose">Choose</button>
-	</div>
-	<div id="notepad" class="tab-pane fade">
-	  <!-- Notepad content goes here --->
-	  <h3 id="noteInfo">
-	<textarea rows="4" cols="30" id="noteText"></textarea>
-	<button id="submitNotes">Submit</button>	
-	</h3></br>
 	</div>
 	<div id="seeNotes" class="tab-pane fade">
 	  <!-- View Notes content goes here --->
