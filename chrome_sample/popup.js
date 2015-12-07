@@ -44,6 +44,8 @@ function doHTML(){
 		document.getElementById("currentFile").innerHTML="Current File: "+localStorage.getItem("filename");
 		document.getElementById("drop").innerHTML=localStorage.getItem("filename")+" <span class='caret' ></span>"; 
 	});
+		document.getElementById("currentFileViewing").innerHTML="Currently Viewing: " + localStorage.getItem("filename");
+
 }	
 
 document.getElementById("choose").addEventListener('click', clickHandler);
@@ -89,7 +91,7 @@ function clickHandler(e) {
 
 function editNotes(e){
 	var notes = document.getElementById("notesFromFile").value;
-	document.getElementById("editNotes").outerHTML= "<button id='saveNotesChanges'>Save</button><button id='cancelNotesChanges'>Cancel</button>";
+	document.getElementById("editNotes").outerHTML= "<button class='btn btn-success-outline' id='saveNotesChanges'>Save</button><button class='btn btn-warning-outline' id='cancelNotesChanges'>Cancel</button>";
 	document.getElementById("saveNotesChanges").addEventListener('click',saveChanges);
 	document.getElementById("cancelNotesChanges").addEventListener('click',cancelChanges);
 	document.getElementById("notesFromFile").outerHTML= "<textarea rows='4' cols='50' id='notesFromFile'></textarea>";
@@ -97,18 +99,18 @@ function editNotes(e){
 }
 function saveChanges(e){
 	localStorage.setItem("viewNotes",document.getElementById("notesFromFile").value);
-	document.getElementById("saveNotesChanges").outerHTML="<button id='editNotes'>Edit</button>";
+	document.getElementById("saveNotesChanges").outerHTML="<button type='button' class='btn btn-primary-outline' id='editNotes'>Edit</button>";
 	document.getElementById("cancelNotesChanges").outerHTML="";
 	document.getElementById("editNotes").addEventListener('click',editNotes);
-	document.getElementById("notesFromFile").outerHTML= "<p id='notesFromFile'></p>";
+	document.getElementById("notesFromFile").outerHTML= "<p class='notes' id='notesFromFile'></p>";
 	document.getElementById("notesFromFile").innerHTML=localStorage.getItem("viewNotes");
 	overwriteFile();
 }
 function cancelChanges(e){
-	document.getElementById("saveNotesChanges").outerHTML="<button id='editNotes'>Edit</button>";
+	document.getElementById("saveNotesChanges").outerHTML="<button class='btn btn-primary-outline' id='editNotes'>Edit</button>";
 	document.getElementById("cancelNotesChanges").outerHTML="";
 	document.getElementById("editNotes").addEventListener('click',editNotes);
-	document.getElementById("notesFromFile").outerHTML= "<p id='notesFromFile'></p>";
+	document.getElementById("notesFromFile").outerHTML= "<p class='notes' id='notesFromFile'></p>";
 	document.getElementById("notesFromFile").innerHTML=localStorage.getItem("viewNotes");
 }
 function overwriteFile(){

@@ -12,7 +12,7 @@ if (xhr.readyState == 4) {
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
 	var context = ["selection","image","video","audio"]; //only appears when text is selected
-	var title = "Write To Server";
+	var title = "Write To File";
 	var id = chrome.contextMenus.create({"title": title, "contexts":context,
 					     "id": "context" + context});
  
