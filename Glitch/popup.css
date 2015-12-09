@@ -1,0 +1,88 @@
+body{
+	width: 380px;
+	background-color: #b1b6c9;
+}
+
+li{
+	display: block;
+	margin: auto;
+}
+
+h1 {
+	text-align: center;
+	margin: auto;
+	color: #013274;
+	text-align: center;
+	font-family: Palatino;
+	font-size: 4em;
+}
+
+h3 {
+	text-align: center;
+	margin: auto;
+	color: #00abe3;
+	font-family: Century Gothic;
+}
+
+p {
+	text-align: center;
+	margin: auto;
+	color: #00abe3;
+	font-family: Century Gothic;
+}
+
+input{
+	border-radius: 10px;
+	margin: auto;
+	display: block;
+}
+
+.btn-primary-outline, .btn-success-outline, .btn-warning-outline{
+	display: block;
+	margin:auto;
+}
+
+.btn-primary-outline, .btn-primary-outline:link, .btn-primary-outline:visited {
+	background-color: transparent;
+	border-radius: 5px;
+	color: #454869;
+	border: 2px solid #454869;
+}
+
+.btn-primary-outline:active, .btn-primary-outline:hover {
+	background-color: #454869;
+	color: #fff
+}
+
+.btn-success-outline, .btn-success-outline:link, .btn-success-outline:visited {
+	background-color: transparent;
+	border-radius: 5px;
+	color: #009900;
+	border: 2px solid #009900;
+}
+.btn-success-outline:active, .btn-success-outline:hover {
+	background-color: #009900;
+	color: #fff
+}
+
+.btn-warning-outline, .btn-warning-outline:link, .btn-warning-outline:visited {
+	background-color: transparent;
+	border-radius: 5px;
+	color: #990000;
+	border: 2px solid #990000;
+}
+
+.btn-warning-outline:active, .btn-warning-outline:hover {
+	background-color: #990000;
+	color: #fff
+}
+
+.notes{
+	text-align: left;
+}
+
+.drop{
+	margin:auto;
+	display:block;
+}
+

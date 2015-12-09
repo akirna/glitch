@@ -1,24 +1,18 @@
 Running instructions:
 
 For the server-
-The server is currently hard coded to run on brki164-lnx-19. So, do the following:
-ssh brki164-lnx-19
-cd in to our team's folder
+The server is currently hard coded to run on brki164-lnx-10. So, do the following:
+ssh brki164-lnx-10
+cd in to this folder
 python httpserver.py
 The server should now be running.
+You can move the server to wherever you want. If you have it on your home directory, you will be able to use the extension with all of your files.
+If you want to change the linux machine that the server is running on for whatever reason, change the host name and port global variables in glitchserver.py, popup.js, and background.js, and then ssh in to that machine instead.
 
 For the extension-
-go to chrome://extensions
-Reload the extension entitled "Senior Design"
+Go to chrome://extensions
+Check the box marked Developer mode if you have not already
+Go to "Load Unpacked Extensions"
+Choose the folder called Glitch
+The extension should now be up and running.
 
-To test-
-Click on the extension icon in the upper right of the browser window (blue box).
-In the pop up, type in a file name in the text box and press submit.
-A pop up window should appear with the file name you entered. That popup comes from the following line of code:
-window.alert(fileName);
-so it is displaying the current state of the fileName variable.
-Now, to send text to the server, highlight a line of text, right click, and select the Write To Server option.
-You should see in your terminal window where the server is running that the server has received a POST. However, the key-value pair, which should be the file name and the selected text, is showing up as undefined and the selected text. This is where our problem lies.
-We make the POST in the onClickHandler function, in the line:
-xhr.send(fileName+"="+sText);
-where fileName is the global variable we discussed and sText is the text the user selected.
